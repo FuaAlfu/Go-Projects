@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import(
 	"fmt"
@@ -10,12 +10,10 @@ import(
 )
 
 func handler(){
+	fmt.Println("Listening at port: 8080")
+	
 	r := mux.NewRouter()
-	router.RegisterRoutes(r)
+	routes.RegisterRoutes(r)
 	http.Handle("/",r)
 	log.Fatal(http.ListenAndServe("localhost:8080",r))
-}
-
-func main() {
-	handler()
 }
