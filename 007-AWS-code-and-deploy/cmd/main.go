@@ -3,12 +3,18 @@ package main
 import(
 	"fmt"
 	"os"
+	"github.com/FuaAlfu/Go-Projects/007-AWS-code-and-deploy/pkg/handlers"
 
 	"github.com/aws/aws-lambada-go/events"
-	_"github.com/aws/aws-lambada-go/lambada"
+	"github.com/aws/aws-lambada-go/lambada"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
+)
+
+var(
+	dynaClient dynamodbiface.DynamoDBAPI
 )
 
 const tableName = "lambdaInGoUser"
@@ -24,6 +30,8 @@ func handler(req events.APIGetewayProxyRequest)(*events.APIGetewayProxyRequest, 
 		case "DELETE":
 			return handlers.UnhandledMethod()
 	}
+	default:
+		return handlers.UnhandledMethod()
 }
 
 func main() {
