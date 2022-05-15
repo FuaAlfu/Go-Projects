@@ -42,4 +42,16 @@ func main(){
 		fmt.Println("set a future time")
 		os.Exit(3)
 	}
+	diff := t.Time.Sub(now)
+	if os.Getenv(markName) == markVale{
+		time.Sleep(diff)
+		err = beeep.Alert("Reminder", string.Join(os.Args[2:]." "), "assets/information.png")
+		if err != nil{
+			fmt.Println(err)
+			os.Exit(4)
+		}
+	}else{
+		cmd := exec.Command(os.Args[0], os.Args[1:]...)
+		cmd.Env = append(os.Environ(), fmt.Sprintf("%s=%s, markName"))
+	}
 }
