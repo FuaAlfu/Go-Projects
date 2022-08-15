@@ -27,7 +27,7 @@ func (u *UserServiceimpl) CreateUser(user *models.User) error{
 	return nil
 }
 
-func (u *UserServiceimpl) GetUser(name string)(*models.User, error){
+func (u *UserServiceimpl) GetUser(name *string)(*models.User, error){
 	return nil, nil
 }
 
@@ -35,6 +35,6 @@ func (u *UserServiceimpl) UpdateUser(user *models.User) error{
 	return nil
 }
 
-func (u *UserServiceimpl) DeleteUser(name string) error{
+func (u *UserServiceimpl) DeleteUser(name *string) error{
 	return nil
 }
