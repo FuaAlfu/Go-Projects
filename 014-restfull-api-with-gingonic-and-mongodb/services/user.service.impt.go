@@ -24,7 +24,8 @@ func (u *UserServiceimpl) GetAll([] *models.User, error){
 }
 
 func (u *UserServiceimpl) CreateUser(user *models.User) error{
-	return nil
+	_, err := u.usercollection.Insert(u.ctx, user)
+	return err
 }
 
 func (u *UserServiceimpl) GetUser(name *string)(*models.User, error){
