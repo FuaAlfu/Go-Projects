@@ -33,6 +33,8 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 }
 
 func (uc *UserController) GetUser(ctx *gin.Context) {
+	username := ctx.Param("name")
+	uc.UserService.GetUser(&username)
 	return ctx.JSON(200, "")
 }
 

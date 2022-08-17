@@ -2,6 +2,7 @@ package services
 
 import( 
 	"context"
+	"encoding"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"github.com/FuaAlfu/Go-Projects/014-restfull-api-with-gingonic-and-mongodb/models"
@@ -29,7 +30,11 @@ func (u *UserServiceimpl) CreateUser(user *models.User) error{
 }
 
 func (u *UserServiceimpl) GetUser(name *string)(*models.User, error){
-	return nil, nil
+	var user *models.User
+	query := bson.D(bson.E([Kay: "name", Value: name]))
+	err := u.usercollection.FindOne(u.ctx, query).Decode(&user)
+	//return nil, nil
+	return user, err
 }
 
 func (u *UserServiceimpl) UpdateUser(user *models.User) error{
