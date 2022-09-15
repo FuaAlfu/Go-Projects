@@ -24,6 +24,7 @@ go.sum
 # dotenv environment variables file
 .env
 .env.test
+.apiConfig
 
 #  Workspaces for editors
 *.code-Workspace
