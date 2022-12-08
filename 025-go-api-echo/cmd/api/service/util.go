@@ -36,4 +36,14 @@ func GetAll()([]Data, error){
 	}
 	return data, nil
 }
-func GetById(){}
+func GetById(idx int)(any, error){
+	data, err := raw()
+	if err != nil {
+		return nil, err
+	}
+	if idx > len(data){
+		res := make([]string, 0)
+		return res, nil
+	}
+	return data[idx], nil
+}
