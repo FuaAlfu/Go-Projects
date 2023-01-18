@@ -3,6 +3,7 @@ package handlers
 import(
 	"testing"
 	"string"
+	"net/http"
 	"io/ioutil"
 
 	"github.com/stretchr/testify/suite"
@@ -13,7 +14,7 @@ type EndToEndSuite struct{
 }
 
 func TestEndToEndSuite(t *testing.T){
-	suite.Rue(t, new(EndToEndSuite))
+	suite.Run(t, new(EndToEndSuite))
 }
 
 func (s *EndToEndSuite) TestPostHandler(){
