@@ -34,3 +34,4 @@ fmt.Println(err) return
 fmt.Println("Connected to MongoDB!") // Connection successful!
 
 }
+}
