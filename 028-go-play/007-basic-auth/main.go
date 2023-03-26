@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+
 )
 
 type Item struct {
@@ -63,12 +64,26 @@ func deleteItem(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func basicAuth(handler http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		username, password, ok := r.BasicAuth()
+		if !ok || username != "admin" || password != "password" {
+			w.Header().Set("WWW-Authenticate", `Basic realm="Please enter your username and password"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+		handler.ServeHTTP(w, r)
+	}
+}
+
 func main() {
-	http.HandleFunc("/items", getItems)
-	http.HandleFunc("/item", getItem)
-	http.HandleFunc("/create-item", createItem)
-	http.HandleFunc("/update-item", updateItem)
-	http.HandleFunc("/delete-item", deleteItem)
+
+	http.HandleFunc("/items", basicAuth(getItems))
+	http.HandleFunc("/item", basicAuth(getItem))
+	http.HandleFunc("/create-item", basicAuth(createItem))
+	http.HandleFunc("/update-item", basicAuth(updateItem))
+	http.HandleFunc("/delete-item", basicAuth(deleteItem))
 
 	http.ListenAndServe(":8080", nil)
+
 }
